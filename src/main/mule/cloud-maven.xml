@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="17525819-0892-47e5-a723-7a6125480bea" >
+		<http:listener-connection host="0.0.0.0" port="8082" protocol="HTTPS">
+			<tls:context >
+				<tls:key-store type="jks" path="S_trust.jks" alias="ms1" keyPassword="admin1234" password="admin1234" />
+			</tls:context>
+		</http:listener-connection>
+	</http:listener-config>
+	<flow name="cloud-mavenFlow" doc:id="0d0b6bd2-8d36-4ec3-8efa-8cdee1b84668" >
+		<http:listener doc:name="Listener" doc:id="26d10fe6-c540-4e1b-b394-26aa0b3bfbd4" config-ref="HTTP_Listener_config" path="/welcome"/>
+		<set-payload value='"Welcome cloud deployment"' doc:name="Set Payload" doc:id="b3e610ab-6cd9-4024-ba89-58776954e3e5" />
+	</flow>
+</mule>
